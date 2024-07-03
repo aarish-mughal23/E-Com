@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,9 +53,29 @@
                     <li class="nav-item">
                         <a href="#app" class="nav-link link-body-emphasis px-2">Item4</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item me-5"1>
                         <a href="#about" class="nav-link link-body-emphasis px-2">Item5</a>
                     </li>
+                    <div class="alert alert-success p-1" style="font-size: 10px;"><?= $_SESSION["dbSuccess"]; ?></div>
+                    <?php if(!empty($_SESSION["dbSuccess"]) && $_SESSION["dbSuccess"]=="Database Deletion Successful"){?>
+
+                        <li class="nav-item ms-5">
+                            <form action="process.php" method="post">
+                                <input type="hidden" name="action" value="ftsetup">
+                                <button class="btn btn-outline-success" type="submit">Click Here to Setup Localhost Database</button>
+                            </form>
+                        </li>
+
+                    <?php }else if(!empty($_SESSION["dbFail"])) { ?>
+
+                        <li class="nav-item ms-5">
+                            <form action="process.php" method="post">
+                                <input type="hidden" name="action" value="fterror">
+                                <button class="btn btn-outline-danger" type="submit">Database Setup Unsuccessful, Click to Drop Corrupt Database</button>
+                            </form>
+                        </li>
+
+                    <?php } ?>
                 </ul>
                 <ul class="nav">
                     <li class="nav-item pe-2">
