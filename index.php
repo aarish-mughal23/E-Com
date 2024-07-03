@@ -88,7 +88,7 @@ session_start();
             </div>
         </nav>
     </header>
-    <div class="row mb-4 border border-5 border-danger rounded-4" style="height: 500px;">
+    <div class="row mb-4 border border-5 border-danger rounded-4 bg-secondary" style="height: 500px;">
         <div class="col d-flex flex-column justify-content-center align-items-center border border-5 border-success rounded-3">
             <div class="row">
                 <div class="col">
@@ -98,13 +98,13 @@ session_start();
             <br>
             <div class="row">
                 <div class="col">
-                    <p class="fst-italic text-center">This page will be the Website's Home Page</p>
+                    <p class="fst-italic text-center">This grey will be replaced by some image.</p>
                 </div>
             </div>
         </div>
     </div>
     <section class="container mt-3">
-        <div class="row mb-4 border border-5 border-danger rounded-4" style="height: 500px;">
+        <div class="row mb-4 border border-5 border-danger rounded-4 bg-secondary" style="height: 500px;">
             <div class="col d-flex content-align-center align-items-center border border-5 border-success rounded-3">
                 <h1 class="display-1">Electronics</h1>
             </div>
@@ -112,7 +112,7 @@ session_start();
                 <h5 class="display-5">Some Placeholder Image here.</h5>
             </div>
         </div>
-        <div class="row mb-4 border border-5 border-danger rounded-4" style="height: 500px;">
+        <div class="row mb-4 border border-5 border-danger rounded-4 bg-secondary" style="height: 500px;">
             <div class="col d-flex content-align-center align-items-center border border-5 border-info rounded-3">
                 <h5 class="display-5">Some Placeholder Image here.</h5>
             </div>
@@ -121,7 +121,7 @@ session_start();
             </div>
 
         </div>
-        <div class="row mb-4 border border-5 border-danger rounded-4" style="height: 500px;">
+        <div class="row mb-4 border border-5 border-danger rounded-4 bg-secondary" style="height: 500px;">
             <div class="col d-flex content-align-center align-items-center border border-5 border-success rounded-3">
                 <h1 class="display-1">Home Appliances</h1>
             </div>

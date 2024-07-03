@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
+    header("Location:dashboard.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,23 +43,27 @@ session_start();
                         <hr>
                     </div>
                 </div>
-                <form action="#">
+                <form action="process.php" method="post">
+                    <input type="hidden" name="action" value="signupUser">
                     <div class="row mb-1">
                         <div class="col">
                             <label for="email" class="form-text">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email">
+                            <input type="email" class="form-control <?= empty($_SESSION["error"]["email"]) ? "" : "is-invalid" ?>" id="email" name="email" value="<?= empty($_SESSION["userData"]["email"]) ? "" : $_SESSION["userData"]["email"] ?>">
+                            <?php if (!empty($_SESSION["error"]["email"])) { ?> <div class="text-danger py-1 mt-1" role="alert" style="font-size:12px;"> <?= $_SESSION["error"]["email"] ?> </div> <?php } ?>
                         </div>
                     </div>
                     <div class="row mb-1">
                         <div class="col">
                             <label for="password" class="form-text">Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <input type="password" class="form-control <?= empty($_SESSION["error"]["password"]) ? "" : "is-invalid" ?>" value="<?= empty($_SESSION["userData"]["password"]) ? "" : $_SESSION["userData"]["password"] ?>" id="password" name="password">
+                            <?php if (!empty($_SESSION["error"]["password"])) { ?> <div class="text-danger py-1 mt-1" role="alert" style="font-size:12px;"> <?= $_SESSION["error"]["password"] ?> </div> <?php } ?>
                         </div>
                     </div>
                     <div class="row mb-1">
                         <div class="col">
                             <label for="password2" class="form-text">Confirm Password</label>
-                            <input type="password" class="form-control" id="password2" name="password2">
+                            <input type="password" class="form-control <?= empty($_SESSION["error"]["password2"]) ? "" : "is-invalid" ?>" value="<?= empty($_SESSION["userData"]["password2"]) ? "" : $_SESSION["userData"]["password2"] ?>" id="password2" name="password2">
+                            <?php if (!empty($_SESSION["error"]["password2"])) { ?> <div class="text-danger py-1 mt-1" role="alert" style="font-size:12px;"> <?= $_SESSION["error"]["password2"] ?> </div> <?php } ?>
                         </div>
                     </div>
                     <div class="row mb-1">
@@ -64,22 +71,33 @@ session_start();
                             <label for="phone" class="form-text">Phone</label>
                             <div class="input-group">
                                 <span class="input-group-text">+92</span>
-                                <input type="text" class="form-control" id="phone" name="phone">
+                                <input type="text" class="form-control <?= empty($_SESSION["error"]["phone"]) ? "" : "is-invalid" ?>" value="<?= empty($_SESSION["userData"]["phone"]) ? "" : $_SESSION["userData"]["phone"] ?>" id="phone" name="phone">
                             </div>
+                            <?php if (!empty($_SESSION["error"]["phone"])) { ?> <div class="text-danger py-1 mt-1" role="alert" style="font-size:12px;"> <?= $_SESSION["error"]["phone"] ?> </div> <?php } ?>
                         </div>
                     </div>
                     <div class="row mb-1">
                         <div class="col">
                             <label for="gender" class="form-text">Gender</label>
-                            <select name="gender" id="gender" class="form-control">
-                                <option value="null" disabled selected>Choose an Option</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-
+                            <select name="gender" id="gender" class="form-control <?= empty($_SESSION["error"]["gender"]) ? "" : "is-invalid" ?>">
+                                <?php if (!empty($_SESSION["userData"]["gender"]) && $_SESSION["userData"]["gender"] == "male") { ?>
+                                    <option value="choose" disabled>Choose an Option</option>
+                                    <option value="male" selected>Male</option>
+                                    <option value="female">Female</option>
+                                <?php } else if (!empty($_SESSION["userData"]["gender"]) && $_SESSION["userData"]["gender"] == "female") { ?>
+                                    <option value="choose" disabled>Choose an Option</option>
+                                    <option value="male">Male</option>
+                                    <option value="female" selected>Female</option>
+                                <?php } else { ?>
+                                    <option value="choose" disabled selected>Choose an Option</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                <?php } ?>
                             </select>
+                            <?php if (!empty($_SESSION["error"]["gender"])) { ?> <div class="text-danger py-1 mt-1" role="alert" style="font-size:12px;"> <?= $_SESSION["error"]["gender"] ?> </div> <?php } ?>
                         </div>
                     </div>
-                    
+
                     <hr>
                     <div class="row mt-1">
                         <div class="col">
@@ -87,6 +105,10 @@ session_start();
                         </div>
                     </div>
                 </form>
+                <?php
+                unset($_SESSION["userData"]);
+                unset($_SESSION["error"]);
+                ?>
                 <div class="row mt-2">
                     <div class="col">
                         <a href="./login.php" class="btn btn-info" style="width: 100%;">Login Instead</a>

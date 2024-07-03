@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(isset($_SESSION["user"])&&!empty($_SESSION["user"])){
+    header("location:dashboard.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,19 +43,21 @@ session_start();
                         <hr>
                     </div>
                 </div>
-                <form action="#">
-
-
+                <?php if (!empty($_SESSION["error"]["userAcc"])) { ?> <div class="alert alert-danger py-1 mt-1" role="alert" style="font-size:12px;"> <?= $_SESSION["error"]["userAcc"] ?> </div> <?php } ?>
+                <form action="process.php" method="POST">
+                <input type="hidden" name="action" value="loginUser">
                     <div class="row mb-1">
                         <div class="col">
                             <label for="email" class="form-text">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email">
+                            <input type="email" class="form-control  <?= empty($_SESSION["error"]["email"]) ? "" : "is-invalid" ?>" id="email" name="email" value="<?= empty($_SESSION["userData"]["email"]) ? "" : $_SESSION["userData"]["email"] ?>">
+                            <?php if (!empty($_SESSION["error"]["email"])) { ?> <div class="text-danger py-1 mt-1" role="alert" style="font-size:12px;"> <?= $_SESSION["error"]["email"] ?> </div> <?php } ?>
                         </div>
                     </div>
                     <div class="row mb-1">
                         <div class="col">
                             <label for="password" class="form-text">Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <input type="password" class="form-control <?= empty($_SESSION["error"]["password"]) ? "" : "is-invalid" ?>" id="password" name="password">
+                            <?php if (!empty($_SESSION["error"]["password"])) { ?> <div class="text-danger py-1 mt-1" role="alert" style="font-size:12px;"> <?= $_SESSION["error"]["password"] ?> </div> <?php } ?>
                             <a href="#" class="form-text" style="font-size: 10px;">Forgot Password?</a>
                         </div>
                     </div>
@@ -63,6 +68,10 @@ session_start();
                         </div>
                     </div>
                 </form>
+                <?php
+                unset($_SESSION["userData"]);
+                unset($_SESSION["error"]);
+                ?>
                 <div class="row mt-2">
                     <div class="col">
                         <a href="./signup.php" class="btn btn-info" style="width: 100%;">Register Instead</a>
