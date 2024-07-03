@@ -9,6 +9,28 @@
     <!-- Some Cool Font Name: Google Fonts -->
 
     <title>Ecommerce Store PHP</title>
+    <style>
+        body {
+            --s: 140px;
+            /* control the size*/
+            --c1: #170409;
+            --c2: #67917a;
+
+            --_g: #0000 52%, var(--c1) 54% 57%, #0000 59%;
+            background:
+                radial-gradient(farthest-side at -33.33% 50%, var(--_g)) 0 calc(var(--s)/2),
+                radial-gradient(farthest-side at 50% 133.33%, var(--_g)) calc(var(--s)/2) 0,
+                radial-gradient(farthest-side at 133.33% 50%, var(--_g)),
+                radial-gradient(farthest-side at 50% -33.33%, var(--_g)),
+                var(--c2);
+            background-size: calc(var(--s)/4.667) var(--s), var(--s) calc(var(--s)/4.667);
+        }
+
+        footer,
+        body {
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -44,12 +66,13 @@
         </nav>
     </header>
     <div class="row mb-4 border border-5 border-danger rounded-4" style="height: 500px;">
-        <div class="col d-flex content-align-center align-items-center border border-5 border-success rounded-3">
+        <div class="col d-flex flex-column justify-content-center align-items-center border border-5 border-success rounded-3">
             <div class="row">
                 <div class="col">
                     <h1 class="display-1 text-center">This will be the Home Page</h1>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col">
                     <p class="fst-italic text-center">This page will be the Website's Home Page</p>
